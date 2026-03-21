@@ -1,0 +1,3 @@
+/mnt/c/Users/iwiwi/Desktop/101Lab/hw7/build/CMakeFiles/RayTracing.dir
+/mnt/c/Users/iwiwi/Desktop/101Lab/hw7/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/iwiwi/Desktop/101Lab/hw7/build/CMakeFiles/rebuild_cache.dir
