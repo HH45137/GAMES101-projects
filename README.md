@@ -61,6 +61,27 @@
   <img src="https://github.com/BlueMicro233/GAMES101-projects/blob/main/hw6/image/bvh.png" width="640" height="480">
 </p>
 
+- hw7：**路径追踪（Path Tracing）**
+
+  - Lecture 15 Ray Tracing 3
+  - Lecture 16 Ray Tracing 4
+  - Lecture 17 Materials and Appearances
+  - Lecture 18 Advanced Topics in Rendering
+ 
+...
+*The Rendering Equation is:*
+
+$$
+L_o(\mathbf{x}, \omega_o) = L_e(\mathbf{x}, \omega_o) + \int_{\Omega} f_r(\mathbf{x}, \omega_i, \omega_o) L_i(\mathbf{x}, \omega_i) \cos\theta_i d\omega_i
+$$
+
+...
+
+>摘自 James T. Kajiya 发表于 SIGGRAPH 1986 的论文《The Rendering Equation》，符号形式有调整。
+
+**“名字越短，事情越大。”——Lingqi Yan**
+
+
 # 构建
 ## Windows 11 (x86-64)
 **你需要安装**：
