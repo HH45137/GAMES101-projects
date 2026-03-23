@@ -108,7 +108,7 @@ Vector3f Scene::castRay(const Ray &ray, int depth) const
         Ray p_to_light_ray(p, ws);
         Intersection shadow_inter = intersect(p_to_light_ray);
         float dist_to_light = (x - p).norm();
-        bool visible = (shadow_inter.happened && std::abs(shadow_inter.distance - dist_to_light) < EPSILON);
+        bool visible = (shadow_inter.happened && std::abs(shadow_inter.distance - dist_to_light) < 0.001);
 
         if (visible && pdf_light > 0.0f) {
             // BSDF 参数顺序：出射方向 wo，入射方向 ws
