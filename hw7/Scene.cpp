@@ -132,10 +132,11 @@ Vector3f Scene::castRay(const Ray &ray, int depth) const
             Intersection indirect_inter = intersect(p_to_wi_ray);
             if (indirect_inter.happened && !indirect_inter.m->hasEmission()) {
                 float pdf = intersection.m->pdf(wo, wi, intersection.normal);
-                indirect_light =
-                        castRay(p_to_wi_ray, depth + 1) *
-                        indirect_inter.m->eval(wo, wi, intersection.normal) *
-                        dotProduct(wi, N) / pdf / RussianRoulette;
+                // L_indir = shade(q, wi) * eval(wo, wi, N) * dot(wi, N) / pdf(wo, wi, N) / RussianRoulette
+                auto shade = castRay(p_to_wi_ray, depth + 1);
+                auto eval = intersection.m->eval(wo, wi, intersection.normal);
+                auto dot_wi_n = dotProduct(wi, N);
+                indirect_light = shade * eval * dot_wi_n / pdf / RussianRoulette;
             }
         }
     }
