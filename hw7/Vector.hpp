@@ -24,7 +24,14 @@ public:
     }
 
     Vector3f operator *(const float &r) const {
-        return Vector3f(x * r, y * r, z * r);
+        __m128 v = _mm_set_ps(z, y, x, 0);
+        __m128 vr = _mm_mul_ps(v, _mm_set1_ps(r));
+
+        float xr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(1, 1, 1, 1)));
+        float yr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(2, 2, 2, 2)));
+        float zr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(3, 3, 3, 3)));
+
+        return Vector3f(xr, yr, zr);
     }
 
     Vector3f operator /(const float &r) const {
