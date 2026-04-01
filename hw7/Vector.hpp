@@ -161,11 +161,25 @@ public:
     }
 
     Vector2f operator *(const float &r) const {
-        return Vector2f(x * r, y * r);
+        __m128 v1 = _mm_set_ps(0, y, x, 0);
+        __m128 vr = _mm_set_ps(0, r, r, 0);
+        vr = _mm_mul_ps(v1, vr);
+
+        float xr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(1, 1, 1, 1)));
+        float yr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(2, 2, 2, 2)));
+
+        return Vector2f(xr, yr);
     }
 
     Vector2f operator +(const Vector2f &v) const {
-        return Vector2f(x + v.x, y + v.y);
+        __m128 v1 = _mm_set_ps(0, y, x, 0);
+        __m128 vr = _mm_set_ps(0, v.y, v.x, 0);
+        vr = _mm_add_ps(v1, vr);
+
+        float xr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(1, 1, 1, 1)));
+        float yr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(2, 2, 2, 2)));
+
+        return Vector2f(xr, yr);
     }
 
     float x, y;
