@@ -54,8 +54,16 @@ public:
         return Vector3f(x / n, y / n, z / n);
     }
 
-    Vector3f operator *(const Vector3f &v) const {
-        return Vector3f(x * v.x, y * v.y, z * v.z);
+    Vector3f operator *(const Vector3f &r) const {
+        __m128 v1 = _mm_set_ps(z, y, x, 0);
+        __m128 vr = _mm_set_ps(r.z, r.y, r.x, 0);
+        vr = _mm_mul_ps(v1, vr);
+
+        float xr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(1, 1, 1, 1)));
+        float yr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(2, 2, 2, 2)));
+        float zr = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(3, 3, 3, 3)));
+
+        return Vector3f(xr, yr, zr);
     }
 
     Vector3f operator -(const Vector3f &v) const {
