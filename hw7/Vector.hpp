@@ -54,7 +54,7 @@ public:
     }
 
     Vector3f normalized() {
-        float n = std::sqrt(x * x + y * y + z * z);
+        float n = norm();
         return Vector3f(x / n, y / n, z / n);
     }
 
