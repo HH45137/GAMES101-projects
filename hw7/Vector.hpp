@@ -102,7 +102,14 @@ public:
     }
 
     Vector3f &operator +=(const Vector3f &v) {
-        x += v.x, y += v.y, z += v.z;
+        __m128 v1 = _mm_set_ps(z, y, x, 0);
+        __m128 vr = _mm_set_ps(v.z, v.y, v.x, 0);
+        vr = _mm_add_ps(v1, vr);
+
+        x = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(1, 1, 1, 1)));
+        y = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(2, 2, 2, 2)));
+        z = _mm_cvtss_f32(_mm_shuffle_ps(vr, vr, _MM_SHUFFLE(3, 3, 3, 3)));
+
         return *this;
     }
 
