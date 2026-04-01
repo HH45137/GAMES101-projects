@@ -46,7 +46,11 @@ public:
     }
 
     float norm() {
-        return std::sqrt(x * x + y * y + z * z);
+        __m128 v1 = _mm_set_ps(z, y, x, 0);
+
+        __m128 dp = _mm_dp_ps(v1, v1, 0xFF);
+        float sun = _mm_cvtss_f32(dp);
+        return sqrtf(sun);
     }
 
     Vector3f normalized() {
