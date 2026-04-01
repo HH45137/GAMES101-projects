@@ -193,14 +193,8 @@ inline Vector3f lerp(const Vector3f &a, const Vector3f &b, const float &t) {
     return a * (1 - t) + b * t;
 }
 
-inline Vector3f normalize(const Vector3f &v) {
-    float mag2 = v.x * v.x + v.y * v.y + v.z * v.z;
-    if (mag2 > 0) {
-        float invMag = 1 / sqrtf(mag2);
-        return Vector3f(v.x * invMag, v.y * invMag, v.z * invMag);
-    }
-
-    return v;
+inline Vector3f normalize(Vector3f v) {
+    return v.normalized();
 }
 
 inline float dotProduct(const Vector3f &a, const Vector3f &b) {
