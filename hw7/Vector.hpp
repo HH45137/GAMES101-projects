@@ -198,7 +198,10 @@ inline Vector3f normalize(Vector3f v) {
 }
 
 inline float dotProduct(const Vector3f &a, const Vector3f &b) {
-    return a.x * b.x + a.y * b.y + a.z * b.z;
+    __m128 v1 = _mm_set_ps(a.z, a.y, a.x, 0);
+    __m128 v2 = _mm_set_ps(b.z, b.y, b.x, 0);
+    v2 = _mm_dp_ps(v1, v2, 0xFF);
+    return _mm_cvtss_f32(v2);
 }
 
 inline Vector3f crossProduct(const Vector3f &a, const Vector3f &b) {
